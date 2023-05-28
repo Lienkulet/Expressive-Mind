@@ -22,6 +22,7 @@ export default async function Home(){
   loading = false;
 
   console.log(blogs?.length);
+  console.log(blogs?.length);
   return (
     <section className=' flex flex-col w-full my-7 p-4'>
       
