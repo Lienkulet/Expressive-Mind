@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { CircleLoader } from 'react-spinners';
 
 export  async function fetchBlogs(){
-  const res = await fetch('http://localhost:3000/api/blog', {
+  const res = await fetch('https://expressive-mind-6470j9tbe-lienkulet.vercel.app/api/blog', {
     method: 'GET',  
     cache: 'no-store'
   });
