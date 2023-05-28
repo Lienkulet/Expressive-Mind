@@ -19,9 +19,11 @@ const CreateBlog = () => {
     const {data: session, status} = useSession()
     const router = useRouter()
 
-    if(!session){
-        router.push('/');
-    }
+    useEffect(() => {
+        if (!session) {
+          router.push('/');
+        }
+      }, [session, router]);
 
     const handleSubmit = async (e) => {
         e.preventDefault()
