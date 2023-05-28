@@ -1,7 +1,7 @@
 'use client' 
 import {useSession} from 'next-auth/react';
 import {useRouter} from 'next/navigation';
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {AiOutlineFileImage} from 'react-icons/ai'
 import {toast} from 'react-toastify';
 
