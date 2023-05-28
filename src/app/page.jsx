@@ -18,7 +18,7 @@ export default async function Home(){
   const blogs = await fetchBlogs();
   loading = false;
 
-
+console.log(blogs?.length);
   return (
     <section className=' flex flex-col w-full my-7 p-4'>
       

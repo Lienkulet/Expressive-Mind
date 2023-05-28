@@ -7,9 +7,9 @@ export async function GET(req) {
   await db.connect()
 
   try {
-      const blogs = await Blog.find({}).sort({createdAt: -1}).limit(10).populate({
+      const blogs = await Blog.find({}).limit(10).populate({
          path: "authorId", select: 'username', model: Useri 
-        }).maxTimeMS(20000).lean();
+        });
       return new Response(JSON.stringify(blogs), { status: 200 })
   } catch (error) {
     console.log(error);
