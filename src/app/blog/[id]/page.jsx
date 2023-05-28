@@ -31,7 +31,7 @@ const BlogDetails = (ctx) => {
     useEffect(() => {
         async function fetchBlog() {
           setLoading(true);
-            const res = await fetch(`/api/blog/${ctx.params.id}`, { cache: 'no-store' })
+            const res = await fetch(`/api/blog/${ctx.params.id}`, { method: 'GET' })
             if(res.ok){
 
                 const blog = await res.json();

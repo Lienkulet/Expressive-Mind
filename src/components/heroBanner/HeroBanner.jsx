@@ -83,7 +83,7 @@ const HeroBanner = ({blogs}) => {
                     <div className='b-0 flex flex-wrap justify-between'>
                         <span className='flex flex-row gap-2 items-center'>
                             <MdOutlineAccountCircle size={'1rem'} />
-                            {blogs[currentImg]?.authorId.username}
+                            {blogs[currentImg]?.authorId?.username}
                             </span>
                     <time className='flex flex-row gap-2 items-center'>
                         <AiOutlineCalendar size={'1rem'} />

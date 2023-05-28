@@ -24,7 +24,6 @@ const Dashboard = () => {
         setLoading(true)
         const res = await fetch(`/api/blog`, {
             method: 'GET',  
-            cache: 'no-store'
         });
         if(!res.ok){
             return

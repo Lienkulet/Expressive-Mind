@@ -73,7 +73,7 @@ const BlogCard = ({
                     <div className='text-[#777]  flex flex-wrap justify-between'>
                         <span className='flex flex-row gap-2 items-center'>
                             <MdOutlineAccountCircle size={'1rem'} />
-                            {authorId.username}
+                            {authorId?.username}
                         </span>
                         <time className='flex flex-row gap-2 items-center'>
                             <AiOutlineCalendar size={'1rem'} />
