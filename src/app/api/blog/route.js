@@ -14,9 +14,7 @@ export async function GET(req) {
       likes: 1,
       authorId: 1,
       createdAt: 1
-   }).limit(5).populate({
-         path: "authorId", select: 'username', model: Useri 
-        });
+   }).limit(5)
       // const blogs = await Blog.find({}).limit(5).populate({
       //    path: "authorId", select: 'username', model: Useri 
       //   });
