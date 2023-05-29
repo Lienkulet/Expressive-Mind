@@ -7,7 +7,7 @@ import axios from 'axios';
 const LazyLink = dynamic(() => import('next/link'), { ssr: true });
 
 export  async function fetchBlogs(){
-  const res = await axios.get('expressive-mind-jufy1z25f-lienkulet.vercel.app/api/blog')
+  const res = await axios.get('https://expressive-mind.vercel.app/api/blog')
   // const res = await axios.get('http://localhost:3000/api/blog')
 
   return res.data;
@@ -16,7 +16,8 @@ export  async function fetchBlogs(){
 
 export default async function Home(){
   let loading = true;
-  const blogs = await fetchBlogs();
+  // const blogs = await fetchBlogs();
+  const blogs = [];
   loading = false;
 
   
