@@ -4,7 +4,7 @@ import { Blog } from "@/models/Blog";
 import { Useri } from "@/models/Useri";
 
 export async function GET(req) {
-  await db.connect()
+  await mongooseConnect();
 
   try {
     const blogs = await Blog.find({}, { 
@@ -26,7 +26,7 @@ export async function GET(req) {
 }
 
 export async function POST(req) {
-  await db.connect();
+  await mongooseConnect();
 
   const accessToken = req.headers.get("authorization");
   const token = accessToken.split(" ")[1];

@@ -3,19 +3,13 @@ import HeroBanner from '@/components/heroBanner/HeroBanner';
 import { CircleLoader } from 'react-spinners';
 import dynamic from 'next/dynamic';
 import { blogs } from '@/lib/data';
+import axios from 'axios';
 const LazyLink = dynamic(() => import('next/link'), { ssr: true });
 
 export  async function fetchBlogs(){
-  const res = await fetch('https://expressive-mind.vercel.app/api/blog', {
-  // const res = await fetch('http://localhost:3000/api/blog', {
-    method: 'GET',  
-    // headers: {
-    //   'Cache-Control': 'public, max-age=10'
-    // }
-    cache: 'no-store'
-  });
+  const res = await axios.get('https://expressive-mind.vercel.app/api/blog')
 
-  return res.json();
+  return res.data;
 }
 
 

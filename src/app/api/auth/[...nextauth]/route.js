@@ -16,7 +16,7 @@ const handler = NextAuth({
             async authorize(credentials, req){
                 const {email, password} = credentials
                
-                await db.connect()
+                await mongooseConnect();
 
                 const user = await Useri.findOne({ email })
 
