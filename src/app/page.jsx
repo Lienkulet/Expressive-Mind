@@ -6,8 +6,8 @@ import dynamic from 'next/dynamic';
 const LazyLink = dynamic(() => import('next/link'), { ssr: true });
 
 export  async function fetchBlogs(){
-  // const res = await fetch('https://expressive-mind-4yrsa1c9j-lienkulet.vercel.app/api/blog', {
-  const res = await fetch('http://localhost:3000/api/blog', {
+  const res = await fetch('https://expressive-mind.vercel.app/api/blog', {
+  // const res = await fetch('http://localhost:3000/api/blog', {
     method: 'GET',  
     // headers: {
     //   'Cache-Control': 'public, max-age=10'
