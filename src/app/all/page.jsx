@@ -1,6 +1,8 @@
 'use client';
 
+import BlogCard from '@/components/blogCard/BlogCard';
 import React, { useEffect, useState } from 'react'
+import { CircleLoader } from 'react-spinners';
 
 const AllBlogs = () => {
     const [blogs, setBlogs] = useState([]);
