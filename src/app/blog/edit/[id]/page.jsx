@@ -1,4 +1,5 @@
 'use client';
+import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
@@ -22,36 +23,23 @@ const EditBlog = (ctx) => {
   
   const [blog, setBlog] = useState('');
   useEffect(() => {
-    async function fetchBlog() {
         setLoading(true);
 
-        const res = await fetch(`/api/blog/${ctx.params.id}`, {
-            method: 'GET',
-        })
-
-        if(res.ok){
-           const xxx = await res.json();
-           console.log(xxx);
-            setBlog(xxx);
-            console.log(await blog);
-
-    
-            console.log('Fetched all', blog); 
-        }
-        setLoading(false);
-
-      }
-        fetchBlog();
+        axios.get(`/api/blog/${ctx.params.id}`).then(res => {
+             setBlog(res.data);
+             setLoading(false);
+        });
   }, []);
 
 
   useEffect(() => {
     setTitle(blog.title);
     setDesc(blog.desc);
-    setCategory(blog.category);
     setSummary(blog.summary);
     setCaption(blog.caption);
-  }, [blog])
+    
+    setCategory(blog.category || "");
+  }, [blog]);
   
 
   const handleUpdate = async (e) => {
@@ -82,23 +70,17 @@ const EditBlog = (ctx) => {
         
         console.log('img',body)
         
-        const res = await fetch(`/api/blog/${ctx.params.id}`, {
+        await axios.put(`/api/blog/${ctx.params.id}`, body,{
             headers: {
                 "Content-Type": 'application/json',
                 "Authorization": `Bearer ${session?.user?.accessToken}`
             },
-            method: "PUT",
-            body: JSON.stringify(body)
+        }).then(res => {
+        const blog = res.data;
+
+        toast.success('Blog Updated Successfully')
+        router.push(`/blog/${blog._id}`)
         })
-
-        if(res.ok){
-            const blog = await res.json()
-
-            toast.success('Blog Updated Successfully')
-            router.push(`/blog/${blog._id}`)
-        }
-
-        
     } catch (error) {
         console.log(error)
     }
@@ -113,16 +95,13 @@ const uploadImage = async () => {
     formData.append("upload_preset", UPLOAD_PRESET)
 
     try {
-        const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {
-            method: "POST",
-            body: formData
-        })
-
-        const data = await res.json()
-
-        const imageUrl = data['secure_url']
-
-        return imageUrl
+        const res = await axios.post(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, formData);
+        
+          const data = res.data;
+        
+          const imageUrl = data.secure_url;
+        
+          return imageUrl;
     } catch (error) {
         console.log(error)
     }

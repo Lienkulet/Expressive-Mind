@@ -1,9 +1,9 @@
-import db from "@/lib/db";
 import {verifyJwtToken} from '@/lib/jwt';
+import { mongooseConnect } from '@/lib/mongoose';
 import { Comment } from '@/models/Comment';
 
 export async function GET(req, ctx){
-    await db.connect();
+    await mongooseConnect();;
     const id = ctx.params.id
     try {
         const comments = await Comment.find({blogId: id}).populate('authorId');
@@ -17,7 +17,7 @@ export async function GET(req, ctx){
 
 
 export async function DELETE(req, {params: id}) {
-    await db.connect();
+    await mongooseConnect();;
   
     const accessToken = req.headers.get('authorization');
     const token = accessToken.split(' ')[1];

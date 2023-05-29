@@ -1,8 +1,6 @@
 'use client';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import { format } from 'timeago.js';
 import { BsHeartFill } from 'react-icons/bs';
@@ -10,49 +8,37 @@ import { RiDeleteBin5Line } from 'react-icons/ri';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 import { CircleLoader } from 'react-spinners';
+import axios from 'axios';
+import dynamic from 'next/dynamic';
+
+const LazyLink = dynamic(() => import('next/link'), {ssr: false});
 
 const Dashboard = () => {
   const {data: session} = useSession();
-  const router = useRouter();
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(false);
 
-    
-
   useEffect(() => {
-    async function fetchBlogs() {
-        setLoading(true)
-        const res = await fetch(`/api/blog`, {
-            method: 'GET',  
-        });
-        if(!res.ok){
-            return
-        }
-        let xxx = await res.json();
-        console.log(xxx);
-        setBlogs(xxx.filter(blog => blog.authorId._id === session?.user?._id));
-        console.log(blogs);
-        setLoading(false);
-      }
-    fetchBlogs();
+    fetchBlogs()
   }, []);
 
-  
+  const fetchBlogs = async () => {
+    setLoading(true)
+        axios.get(`/api/blog`).then(res => {
+            const xxx = res.data
+            setBlogs(xxx.filter(blog => blog.authorId._id === session?.user?._id));
+            setLoading(false);
+        })
+  }
   
   const handleDelete = async (id) => {
     try {
-        const res = await fetch(`/api/blog/${id}`, {
-            headers: {
-                'Authorization' : `Bearer ${session?.user?.accessToken}`
-            },
-            method: 'DELETE',
+        await axios.delete(`/api/blog/${id}`).then(res => {
+            if(res.status === 200){
+                toast.success('Successfully deleted')
+                fetchBlogs();
+            }
         });
-
-        if(res.ok){
-            toast.success('Successfully deleted')
-            fetchBlogs();
-        }
-
     } catch (error) {
         console.log(error);
     }
@@ -86,11 +72,11 @@ const Dashboard = () => {
                         />
                         <figcaption className='p-4 flex flex-col min-w-[400px]'>
                              <div className='flex flex-wrap gap-4 justify-end'>
-                                <Link href={`/blog/edit/${blog._id}`} className='flex flex-row gap-2 items-center bg-[#4CC186] 
+                                <LazyLink href={`/blog/edit/${blog._id}`} className='flex flex-row gap-2 items-center bg-[#4CC186] 
                                     py-2 px-3 rounded-md text-xl text-white'>
                                     <AiOutlineEdit />
                                     Edit
-                                    </Link>
+                                    </LazyLink>
                                 <button className='flex flex-row gap-2 items-center bg-[#D90000] 
                                     py-2 px-3 rounded-md text-xl text-white'
                                     onClick={() => handleDelete(blog._id)}>
@@ -99,9 +85,9 @@ const Dashboard = () => {
                                     </button>
                             </div>
                             <div className='flex flex-col'>
-                                <Link href={`/blog/${blog._id}`}
+                                <LazyLink href={`/blog/${blog._id}`}
                                     className='font-extrabold text-3xl text-[#005B6B]'
-                                >{blog.title}</Link>
+                                >{blog.title}</LazyLink>
                                 <div className='flex flex-row justify-between mt-2'>
                                     <time>{format(blog.createdAt)}</time>
                                     <h2 className='flex flex-row items-center gap-2'>

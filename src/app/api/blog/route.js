@@ -1,5 +1,5 @@
-import db from "@/lib/db";
 import { verifyJwtToken } from "@/lib/jwt";
+import { mongooseConnect } from "@/lib/mongoose";
 import { Blog } from "@/models/Blog";
 import { Useri } from "@/models/Useri";
 
@@ -14,10 +14,12 @@ export async function GET(req) {
       likes: 1,
       authorId: 1,
       createdAt: 1
-   }).limit(5)
-      // const blogs = await Blog.find({}).limit(5).populate({
-      //    path: "authorId", select: 'username', model: Useri 
-      //   });
+   }).limit(5).populate({
+       path: "authorId", 
+       select: 'username',
+        model: Useri 
+      });
+
       return new Response(JSON.stringify(blogs), { status: 200 })
   } catch (error) {
     console.log(error);

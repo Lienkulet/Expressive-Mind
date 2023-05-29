@@ -1,9 +1,9 @@
-import db from "@/lib/db";
+import { mongooseConnect } from "@/lib/mongoose";
 import { Blog } from "@/models/Blog";
 import { Useri } from "@/models/Useri";
 
 export  async function GET(req, ctx){
-    await db.connect()
+    await mongooseConnect();
     
     try {
         const topic = ctx.params.topic;

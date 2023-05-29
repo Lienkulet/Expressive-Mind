@@ -1,10 +1,10 @@
-import db from "@/lib/db";
+import { mongooseConnect } from "@/lib/mongoose";
 import { Useri } from "@/models/Useri";
 import bcrypt from 'bcrypt'
 
 export async function POST(req){
     try {
-        await db.connect()
+        await mongooseConnect();
         const {username, email, password: pass} = await req.json()
 
         const isExisting = await Useri.findOne({email})

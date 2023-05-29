@@ -3,7 +3,7 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import { Useri } from "@/models/Useri";
 import { signJwtToken } from "@/lib/jwt";
 import bcrypt from 'bcrypt'
-import db from "@/lib/db";
+import { mongooseConnect } from "@/lib/mongoose";
 
 const handler = NextAuth({
     providers: [

@@ -2,12 +2,13 @@ import BlogCard from '@/components/blogCard/BlogCard'
 import HeroBanner from '@/components/heroBanner/HeroBanner';
 import { CircleLoader } from 'react-spinners';
 import dynamic from 'next/dynamic';
-import { blogs } from '@/lib/data';
+// import { blogs } from '@/lib/data';
 import axios from 'axios';
 const LazyLink = dynamic(() => import('next/link'), { ssr: true });
 
 export  async function fetchBlogs(){
   const res = await axios.get('https://expressive-mind.vercel.app/api/blog')
+  // const res = await axios.get('http://localhost:3000/api/blog')
 
   return res.data;
 }
@@ -15,11 +16,10 @@ export  async function fetchBlogs(){
 
 export default async function Home(){
   let loading = true;
-  // const blogs = await fetchBlogs();
+  const blogs = await fetchBlogs();
   loading = false;
 
-  console.log(blogs?.length);
-  console.log(blogs?.length);
+  
   return (
     <section className=' flex flex-col w-full my-7 p-4'>
       

@@ -1,9 +1,9 @@
 'use client';
 
 import Comment from '@/components/comment/Comment';
+import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
-import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import React, {useEffect, useState} from 'react';
 import { toast } from 'react-hot-toast';
@@ -15,6 +15,9 @@ import {
 import {BsDot, BsFillPencilFill} from 'react-icons/bs';
 import { CircleLoader } from 'react-spinners';
 import {format} from 'timeago.js';
+import dynamic from 'next/dynamic';
+
+const LazyLink = dynamic(() => import('next/link'), {ssr: false});
 
 const BlogDetails = (ctx) => {
     const [blogDetails, setBlogDetails] = useState('');
@@ -29,51 +32,30 @@ const BlogDetails = (ctx) => {
     const { data: session } = useSession()
 
     useEffect(() => {
-        async function fetchBlog() {
-          setLoading(true);
-            const res = await fetch(`/api/blog/${ctx.params.id}`, { method: 'GET' })
-            if(res.ok){
-
-                const blog = await res.json();
-                
-                setBlogDetails(blog)
-                setIsLiked(blog?.likes?.includes(session?.user?._id))
-                setBlogLikes(blog?.likes?.length || 0)
-            }
-            setLoading(false)
-        }
-
-       
-         fetchBlog();
+      setLoading(true);
+      axios.get(`/api/blog/${ctx.params.id}`).then(res => {
+              setBlogDetails(res.data)
+              setIsLiked(res.data?.likes?.includes(session?.user?._id))
+              setBlogLikes(res.data?.likes?.length || 0)
+              setLoading(false)
+            })
     }, [])
 
     useEffect(() => {
-        async function fetchComments() {
-          setCommentsLoading(true);
-            const res = await fetch(`/api/comment/${ctx.params.id}`, { method: 'GET', cache: 'no-store' })
-            if(res.ok){
-
-                const comment = await res.json();
-                
-                setComments(comment);
-                console.log(comments.length)
-            }
-            setCommentsLoading(false);
-        }
-
-        fetchComments();
+      setCommentsLoading(true);
+      axios.get(`/api/comment/${ctx.params.id}`).then(res => {
+              setComments(res.data);
+              setCommentsLoading(false);
+            })
     }, [])
 
     const handleLike  = async () => {
         try {
-            const res = await fetch(`/api/blog/${ctx.params.id}/like`, {
-                headers:{
-                    'Authorization': `Bearer ${session?.user?.accessToken}`
-                },
-                method: 'PUT'
-            });
-
-            if(res.ok){
+            await axios.put(`/api/blog/${ctx.params.id}/like`, null, {
+              headers: {
+                'Authorization': `Bearer ${session?.user?.accessToken}`
+              }
+            })
                 if(isLiked){
                     setIsLiked(prev => !prev);
                     setBlogLikes(prev => prev-1);
@@ -81,7 +63,6 @@ const BlogDetails = (ctx) => {
                     setIsLiked(prev => !prev)
                     setBlogLikes(prev => prev + 1);
                 }
-            }
 
         } catch (error) {
             console.log(error); 
@@ -90,14 +71,10 @@ const BlogDetails = (ctx) => {
 
     const handleDelete = async () => {
         try {
-                const res = await fetch(`/api/blog/${ctx.params.id}`, {
-                    headers: {
-                        'Authorization': `Bearer ${session?.user?.accessToken}`
-                    },
-                    method: "DELETE"
-                })
+          const res = await axios.delete(`/api/blog/${ctx.params.id}`);
 
-                if (res.ok) {
+                if (res.status === 200) {
+                  toast.success('Successfully deleted');
                     router.push('/')
                 }
             
@@ -125,18 +102,15 @@ const BlogDetails = (ctx) => {
                 title: commentTitle,
                 text: commentDesc
             }
-    
-            const res = await fetch(`/api/comment`, {
+            setCommentsLoading(true);
+            await axios.post(`/api/comment`, body, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${session?.user?.accessToken}`
                 },
-                method: "POST",
-                body: JSON.stringify(body)
-            });
-
-            if(res.ok){
-                const newComment = await res.json();
+            }).then(res => {
+              if(res.status === 200){
+                const newComment = res.data;
 
                 setComments(prev => {
                     return [newComment, ...prev]
@@ -144,7 +118,11 @@ const BlogDetails = (ctx) => {
     
                 setCommentTitle('');
                 setCommentDesc('');
+                setCommentsLoading(false);
             }
+            })
+
+            
             
         } catch (error) {
          console.log(error);   
@@ -169,13 +147,13 @@ const BlogDetails = (ctx) => {
                 {blogDetails?.authorId?._id.toString() === session?.user?._id ? (
                   <ul className='flex flex-wrap gap-2'>
                     <li>
-                      <Link
+                      <LazyLink
                         href={`/blog/edit/${blogDetails?._id}`}
                         className='flex gap-2 items-center'
                       >
                         <BsFillPencilFill />
                         Edit
-                      </Link>
+                      </LazyLink>
                     </li>
                     <li>
                       <button
