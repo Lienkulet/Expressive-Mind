@@ -2,7 +2,7 @@ import BlogCard from '@/components/blogCard/BlogCard'
 import HeroBanner from '@/components/heroBanner/HeroBanner';
 import { CircleLoader } from 'react-spinners';
 import dynamic from 'next/dynamic';
-
+import { blogs } from '@/lib/data';
 const LazyLink = dynamic(() => import('next/link'), { ssr: true });
 
 export  async function fetchBlogs(){
@@ -21,7 +21,7 @@ export  async function fetchBlogs(){
 
 export default async function Home(){
   let loading = true;
-  const blogs = await fetchBlogs();
+  // const blogs = await fetchBlogs();
   loading = false;
 
   console.log(blogs?.length);
