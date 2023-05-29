@@ -16,8 +16,8 @@ export  async function fetchBlogs(){
 
 export default async function Home(){
   let loading = true;
-  // const blogs = await fetchBlogs();
-  const blogs = [];
+  const blogs = await fetchBlogs();
+  // const blogs = [];
   loading = false;
 
   
