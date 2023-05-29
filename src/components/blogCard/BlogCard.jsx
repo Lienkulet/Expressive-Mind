@@ -2,11 +2,13 @@
 
 import { useSession } from 'next-auth/react';
 import Image from 'next/image'
-import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import {AiFillHeart, AiOutlineCalendar, AiOutlineHeart} from 'react-icons/ai';
 import { MdOutlineAccountCircle } from 'react-icons/md';
 import { format } from 'timeago.js';
+import dynamic from 'next/dynamic';
+
+const LazyLink = dynamic(() => import('next/link'), { ssr: false })
 
 const BlogCard = ({
     blog: {
@@ -56,7 +58,7 @@ const BlogCard = ({
         <div className='h-[350px] max-h-[350px] md:w-[800px] shadow-md transition-[150ms] rounded-2xl
                       hover:shadow-lg'>
             <div className=' h-full flex md:flex-row flex-col'>
-                <Link href={`/blog/${_id}`}>
+                <LazyLink href={`/blog/${_id}`}>
                     <Image 
                         src={imgUrl}
                         alt={title}
@@ -66,7 +68,7 @@ const BlogCard = ({
                          md:rounded-br-none w-[450px] max-h-[350px] my-0 h-full
                         hover:shadow-lg mx-auto'
                     />
-                </Link>
+                </LazyLink>
                 <div className='ml-3 p-5 flex flex-col justify-between w-[80%]'>
                     <div>
                         <h3 className='text-3xl text-[#005B6B] font-extrabold'>{title}</h3>
@@ -107,11 +109,11 @@ const BlogCard = ({
                             
                         
                     </div>
-                        <Link href={`/blog/${_id}`}
+                        <LazyLink href={`/blog/${_id}`}
                          className='py-2 px-3 rounded-2xl border-2 
                          border-[#005B6B] hover:font-bold text-[#005B6B]'>
                             Read More
-                        </Link>
+                        </LazyLink>
                     </footer>
                 </div>
                 

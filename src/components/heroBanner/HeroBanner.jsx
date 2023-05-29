@@ -1,12 +1,15 @@
 'use client';
-import Image from 'next/image';
-import Link from 'next/link';
+
 import React, { useEffect, useState } from 'react'
 import { AiOutlineCalendar } from 'react-icons/ai';
 import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs'
 import { MdOutlineAccountCircle } from 'react-icons/md';
 import { RxDotFilled} from 'react-icons/rx'
 import { format } from 'timeago.js';
+import dynamic from 'next/dynamic';
+
+const LazyLink = dynamic(() => import('next/link'), { ssr: true });
+
 const HeroBanner = ({blogs}) => {
 
     const [currentImg, setCurrentImg] = useState(0);   
@@ -74,11 +77,11 @@ const HeroBanner = ({blogs}) => {
                     className='w-[450px] h-[400px] md:w-screen md:h-[600px] object-cover objectFit="contain mb-2 rounded-tr-xl rounded-tl-xl z-0'
                 />
                 <figcaption className='p-6 '>
-                    <Link  href={`/blog/${blogs[currentImg]?._id}`}
+                    <LazyLink  href={`/blog/${blogs[currentImg]?._id}`}
                      className='font-extrabold text-xl uppercase'>
                     {blogs[currentImg]?.title}
 
-                    </Link>
+                    </LazyLink>
                     
                     <div className='b-0 flex flex-wrap justify-between'>
                         <span className='flex flex-row gap-2 items-center'>
