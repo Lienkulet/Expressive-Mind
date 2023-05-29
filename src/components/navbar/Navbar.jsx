@@ -32,6 +32,7 @@ const Navbar = () => {
 
                     <div className='hidden md:flex flex-row items-center justify-between gap-5'>                   
                     <Link href={'/'}>Home</Link>
+                    <Link href={'/all'}>All</Link>
 
                 <ul className='flex items-center gap-5'>
                     {

@@ -8,7 +8,7 @@ export const blogs = [
     {
         title: 'Blog 1',
         desc: 'lorem ipsum',
-        img: img1,
+        imgUrl: img1,
         summary: 'ssdsdsa',
         caption: 'wow',
         authorId: 'someauthorid',
@@ -16,7 +16,7 @@ export const blogs = [
     {
         title: 'Blog 2',
         desc: 'lorem ipsumsdds',
-        img: img2,
+        imgUrl: img2,
         summary: 'ssdsdsa',
         caption: 'wow',
         authorId: 'someauthorid',
@@ -24,7 +24,7 @@ export const blogs = [
     {
         title: 'Blog 3',
         desc: 'lorem ipsumsddsdssdsd',
-        img: img3,
+        imgUrl: img3,
         summary: 'ssdsdsa',
         caption: 'wow',
         authorId: 'someauthorid',
@@ -32,7 +32,7 @@ export const blogs = [
     {
         title: 'Blog 4',
         desc: 'lorem ipsumdsdsdssdsd',
-        img: img4,
+        imgUrl: img4,
         summary: 'ssdsdsa',
         caption: 'wow',
         authorId: 'someauthorid',
