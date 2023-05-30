@@ -10,9 +10,9 @@ import { toast } from 'react-toastify';
 import { CircleLoader } from 'react-spinners';
 import axios from 'axios';
 import dynamic from 'next/dynamic';
-import { mongooseConnect } from '@/lib/mongoose';
-import { Blog } from '@/models/Blog';
-import { Useri } from '@/models/Useri';
+// import { mongooseConnect } from '@/lib/mongoose';
+// import { Blog } from '@/models/Blog';
+// import { Useri } from '@/models/Useri';
 
 const LazyLink = dynamic(() => import('next/link'), {ssr: false});
 
@@ -21,42 +21,42 @@ const Dashboard = async() => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(false);
 
-//   useEffect(() => {
-//     fetchBlogs()
-//   }, []);
+  useEffect(() => {
+    fetchBlogs()
+  }, []);
 
-//   const fetchBlogs = async () => {
-//     setLoading(true)
-//         axios.get(`/api/blog`).then(res => {
-//             const xxx = res.data
-//             setBlogs(xxx.filter(blog => blog.authorId._id === session?.user?._id));
-//             setLoading(false);
-//         })
-//   }
-
-
-  async function fetchBlogs(){
-    await mongooseConnect();
-      const blox = await Blog.find({}, { 
-      title: 1,
-      summary: 1,
-      imgUrl: 1,
-      likes: 1,
-      authorId: 1,
-      createdAt: 1
-   }).limit(5).populate({
-       path: "authorId", 
-       select: 'username',
-        model: Useri
-      });
-      console.log(blox.length);
-
-      return JSON.parse(JSON.stringify(blox));
+  const fetchBlogs = async () => {
+    setLoading(true)
+        axios.get(`/api/blog`).then(res => {
+            const xxx = res.data
+            setBlogs(xxx.filter(blog => blog.authorId._id === session?.user?._id));
+            setLoading(false);
+        })
   }
 
-  const xxx = await fetchBlogs();
 
-  setBlogs(xxx.filter(blog => blog.authorId._id === session?.user?._id));
+//   async function fetchBlogs(){
+//     await mongooseConnect();
+//       const blox = await Blog.find({}, { 
+//       title: 1,
+//       summary: 1,
+//       imgUrl: 1,
+//       likes: 1,
+//       authorId: 1,
+//       createdAt: 1
+//    }).limit(5).populate({
+//        path: "authorId", 
+//        select: 'username',
+//         model: Useri
+//       });
+//       console.log(blox.length);
+
+//       return JSON.parse(JSON.stringify(blox));
+//   }
+
+//   const xxx = await fetchBlogs();
+
+//   setBlogs(xxx.filter(blog => blog.authorId._id === session?.user?._id));
 
 
   const handleDelete = async (id) => {

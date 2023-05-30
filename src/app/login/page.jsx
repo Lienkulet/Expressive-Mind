@@ -1,12 +1,18 @@
 'use client';
-import { signIn } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 import Link from 'next/link'
+import { useRouter } from 'next/router';
 import React, { useState } from 'react'
 import { toast } from 'react-toastify'
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const {data: session} = useSession();
+    const router = useRouter();
+    if(session){
+      router.back();
+    }
 
     const handleSubmit = async(e) => {
         e.preventDefault(); 

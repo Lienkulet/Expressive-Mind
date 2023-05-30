@@ -1,12 +1,19 @@
 import {verifyJwtToken} from '@/lib/jwt';
 import { mongooseConnect } from '@/lib/mongoose';
 import { Comment } from '@/models/Comment';
+import { Useri } from '@/models/Useri';
 
 export async function GET(req, ctx){
     await mongooseConnect();;
     const id = ctx.params.id
     try {
-        const comments = await Comment.find({blogId: id}).populate('authorId');
+        const comments = await Comment.find({blogId: id}).populate(
+            {
+                path:'authorId',
+                select: 'username',
+                model: Useri
+            }
+            );
 
         return new Response(JSON.stringify(comments), { status: 200 })
     } catch (error) {

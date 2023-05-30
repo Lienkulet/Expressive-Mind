@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-sdk/credential-providers": "^3.341.0",
+    "@mongodb-js/zstd": "^1.1.0",
     "autoprefixer": "10.4.14",
     "axios": "^1.4.0",
     "bcrypt": "^5.1.0",
@@ -16,8 +18,10 @@
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.2",
     "jsonwebtoken": "^9.0.0",
+    "kerberos": "^2.0.1",
     "mongodb": "^5.5.0",
-    "mongoose": "^7.1.1",
+    "mongodb-client-encryption": "^2.8.0",
+    "mongoose": "^7.2.2",
     "next": "^13.4.4",
     "next-auth": "^4.22.1",
     "postcss": "8.4.23",
@@ -27,6 +31,7 @@
     "react-icons": "^4.8.0",
     "react-spinners": "^0.13.8",
     "react-toastify": "^9.1.2",
+    "snappy": "^7.2.2",
     "tailwindcss": "3.3.2",
     "timeago.js": "^4.0.2"
   }
