@@ -36,11 +36,11 @@ const BlogSchema = new Schema({
         ]
     },
     authorId: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'useri'
     },
     likes: [{
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'useri'
     }],
     

@@ -1,14 +1,12 @@
 'use client';
 import { signIn } from 'next-auth/react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { toast } from 'react-toastify'
 
-const Login = async() => {
+const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const router = useRouter();
 
     const handleSubmit = async(e) => {
         e.preventDefault(); 
@@ -17,15 +15,12 @@ const Login = async() => {
             toast.error('Please fill all fields');
             return;
         }
-
-
-
+        
         try {
             const res = await signIn('credentials', {email, password, redirect: false});
 
             if(res.error === null){
                 toast.success('Successfully logged in')
-                router.back('');
             } else {
                 toast.error('An error occured while loggin in');
             }
@@ -57,9 +52,9 @@ const Login = async() => {
           hover:border-[#55B1DF] outline-none'   
         />
         <div className='flex justify-between items-center mt-9'>
-          <a href='/register' className='text-sm hover:text-gray-400'>
+          <Link href='/register' className='text-sm hover:text-gray-400'>
             Register
-          </a>
+          </Link>
           <button className='bg-[#55B1DF] rounded-2xl py-2 px-8
            text-white font-bold text-sm border border-sky-500
            hover:text-[#55B1DF] hover:bg-white'

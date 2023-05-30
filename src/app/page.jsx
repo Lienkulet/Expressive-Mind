@@ -1,3 +1,4 @@
+'use server';
 import BlogCard from '@/components/blogCard/BlogCard'
 import HeroBanner from '@/components/heroBanner/HeroBanner';
 import dynamic from 'next/dynamic';
@@ -6,20 +7,10 @@ import { Blog } from '@/models/Blog';
 import { Useri } from '@/models/Useri';
 const LazyLink = dynamic(() => import('next/link'), { ssr: true });
 
-// export  async function fetchBlogs(){
-//   const res = await axios.get('https://expressive-mind.vercel.app/api/blog')
-//   // const res = await axios.get('http://localhost:3000/api/blog')
-
-//   return res.data;
-// }
-
-
-
 export default async function Home(){
   // const blogs = await fetchBlogs();
 
   async function fetchBlogs(){
-    'use server'
     await mongooseConnect();
       const blox = await Blog.find({}, { 
       title: 1,
