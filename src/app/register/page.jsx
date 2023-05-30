@@ -3,7 +3,7 @@ import { signIn } from 'next-auth/react'
 import React, { useState } from 'react'
 import { toast } from 'react-toastify'
 
-const Register = async() => {
+const Register = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

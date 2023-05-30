@@ -74,7 +74,7 @@ const BlogCard = ({
                         <h3 className='text-3xl text-[#005B6B] font-extrabold'>{title}</h3>
                     <div className='text-[#777]  flex flex-wrap justify-between'>
                         <span className='flex flex-row gap-2 items-center'>
-                            <MdOutlineAccountCircle size={'1rem'} />
+                            <MdOutlineAccountCircle  size={'1rem'} />
                             {authorId?.username}
                         </span>
                         <time className='flex flex-row gap-2 items-center'>
@@ -96,9 +96,9 @@ const BlogCard = ({
                                 <>
                                 {
                                     isLiked ? (
-                                        <AiFillHeart onClick={handleLike} size={20}/>
+                                        <AiFillHeart fill='red' onClick={handleLike} size={20}/>
                                     ) : (
-                                        <AiOutlineHeart onClick={handleLike} size={20}/>
+                                        <AiOutlineHeart fill='red' onClick={handleLike} size={20}/>
                                     )
                                     }
                                 </>
