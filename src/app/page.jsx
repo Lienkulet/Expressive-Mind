@@ -24,7 +24,7 @@ export default async function Home(){
        select: 'username',
         model: Useri
       });
-      console.log(blox.length);
+      // console.log(blox.length);
 
       return JSON.parse(JSON.stringify(blox));
   }
