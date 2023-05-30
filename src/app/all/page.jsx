@@ -26,7 +26,7 @@ const AllBlogs = async() => {
       likes: 1,
       authorId: 1,
       createdAt: 1
-   }).limit(5).populate({
+   }).sort({createdAt: -1}).limit(5).populate({
        path: "authorId", 
        select: 'username',
         model: Useri

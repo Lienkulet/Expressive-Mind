@@ -29,7 +29,12 @@ const Navbar = () => {
         <div className='fixed z-50 top-0 left-0 w-full bg-[#005B6B] shadow py-3'>
             <div className='w-[83%] my-0 mx-auto flex justify-between items-center relative  text-white text-lg'>
 
-                    <Link href='/' className='flex flex-row'>
+                    <Link href='/' className='flex flex-row'
+                        onClick={() => toast.loading('Loading', {
+                            id: 'loading',
+                            duration: 5000
+                        })}
+                    >
                         <h1 className='text-[#66CAE3] text-2xl font-bold'>Expressive</h1>
                         <h1 className='text-white text-2xl font-bold'>Mind</h1>
                     </Link>

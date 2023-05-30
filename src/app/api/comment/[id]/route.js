@@ -7,7 +7,7 @@ export async function GET(req, ctx){
     await mongooseConnect();;
     const id = ctx.params.id
     try {
-        const comments = await Comment.find({blogId: id}).populate(
+        const comments = await Comment.find({blogId: id}).sort({ createdAt: -1 }).populate(
             {
                 path:'authorId',
                 select: 'username',
