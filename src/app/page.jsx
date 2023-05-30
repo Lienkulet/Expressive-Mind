@@ -1,9 +1,6 @@
 import BlogCard from '@/components/blogCard/BlogCard'
 import HeroBanner from '@/components/heroBanner/HeroBanner';
-import { CircleLoader } from 'react-spinners';
 import dynamic from 'next/dynamic';
-// import { blogs } from '@/lib/data';
-import axios from 'axios';
 import { mongooseConnect } from '@/lib/mongoose';
 import { Blog } from '@/models/Blog';
 import { Useri } from '@/models/Useri';

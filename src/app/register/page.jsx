@@ -1,10 +1,9 @@
 'use client'
 import { signIn } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { toast } from 'react-toastify'
 
-const Register = () => {
+const Register = async() => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

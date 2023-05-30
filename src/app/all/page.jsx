@@ -1,21 +1,46 @@
-'use client';
 
 import BlogCard from '@/components/blogCard/BlogCard';
+import { mongooseConnect } from '@/lib/mongoose';
+import { Blog } from '@/models/Blog';
+import { Useri } from '@/models/Useri';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { CircleLoader } from 'react-spinners';
 
-const AllBlogs = () => {
-    const [blogs, setBlogs] = useState([]);
-    const [loading, setLoading] = useState(false);
+const AllBlogs = async() => {
+    // const [blogs, setBlogs] = useState([]);
+    // const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-            setLoading(true);
-            axios.get('/api/blog').then(res => setBlogs(res.data));
+    // useEffect(() => {
+    //         setLoading(true);
+    //         axios.get('/api/blog').then(res => setBlogs(res.data));
           
-            setLoading(false);
-    }, []);
+    //         setLoading(false);
+    // }, []);
     
+  const loading = false;
+
+  async function fetchBlogs(){
+    'use server'
+    await mongooseConnect();
+      const blox = await Blog.find({}, { 
+      title: 1,
+      summary: 1,
+      imgUrl: 1,
+      likes: 1,
+      authorId: 1,
+      createdAt: 1
+   }).limit(5).populate({
+       path: "authorId", 
+       select: 'username',
+        model: Useri
+      });
+      console.log(blox.length);
+
+      return JSON.parse(JSON.stringify(blox));
+  }
+
+  const blogs = await fetchBlogs()
 
 
   return (

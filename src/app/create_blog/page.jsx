@@ -5,7 +5,7 @@ import React, {useEffect, useState} from 'react'
 import {AiOutlineFileImage} from 'react-icons/ai'
 import {toast} from 'react-toastify';
 
-const CreateBlog = () => {
+const CreateBlog = async() => {
     const CLOUD_NAME = process.env.NEXT_PUBLIC_CLOUD_NAME;
     const UPLOAD_PRESET = process.env.NEXT_PUBLIC_UPLOAD_PRESET;
 
