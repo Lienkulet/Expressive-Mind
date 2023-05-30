@@ -4,7 +4,6 @@ import { mongooseConnect } from '@/lib/mongoose';
 import { Blog } from '@/models/Blog';
 import { Useri } from '@/models/Useri';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
 import { CircleLoader } from 'react-spinners';
 
 const AllBlogs = async() => {
