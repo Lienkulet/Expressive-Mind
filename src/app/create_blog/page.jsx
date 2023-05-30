@@ -16,7 +16,7 @@ const CreateBlog = async() => {
     const [summary, setSummary] = useState('')
     const [caption, setCaption] = useState('')
 
-    const {data: session, status} = useSession()
+    const {data: session} = useSession()
     const router = useRouter()
 
     useEffect(() => {
