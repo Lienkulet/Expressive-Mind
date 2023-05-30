@@ -11,7 +11,7 @@ const Login = () => {
     const {data: session} = useSession();
     const router = useRouter();
     if(session){
-      router.back();
+      router.push('/');
     }
 
     const handleSubmit = async(e) => {
@@ -27,6 +27,12 @@ const Login = () => {
 
             if(res.error === null){
                 toast.success('Successfully logged in')
+                const previousPage = sessionStorage.getItem('previousPage');
+              if (previousPage === '/register') {
+                router.push('/');
+              } else {
+                router.back();
+              }
             } else {
                 toast.error('An error occured while loggin in');
             }

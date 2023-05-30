@@ -6,6 +6,7 @@ import person from '../../../public/person.jpg'
 import {AiOutlineClose, AiOutlineMenu} from 'react-icons/ai'
 import { signIn, signOut, useSession } from 'next-auth/react';
 import dynamic from 'next/dynamic';
+import { toast } from 'react-hot-toast';
 
 const LazyLink = dynamic(() => import('next/link'), {ssr: false})
 
@@ -34,8 +35,16 @@ const Navbar = () => {
                     </Link>
 
                     <div className='hidden md:flex flex-row items-center justify-between gap-5'>                   
-                    <Link href={'/'}>Home</Link>
-                    <LazyLink href={'/all'}>All</LazyLink>
+                    <Link href={'/'} 
+                        onClick={() => toast.loading('Loading', {
+                            id: 'loading',
+                            duration: 5000
+                        })}
+                    >Home</Link>
+                    <LazyLink href={'/all'} onClick={() => toast.loading('Loading', {
+                        id: 'loading',
+                        duration: 5000
+                    })}>All</LazyLink>
 
                 <ul className='flex items-center gap-5'>
                     {
@@ -50,9 +59,19 @@ const Navbar = () => {
                                 <div className='absolute bg-[#005B6B] p-3 mr-6 flex flex-col items-start gap-2 top-8 right-[-3rem] rounded-md cursor-pointer'>
                                     <AiOutlineClose onClick={handleHideDropdown}
                                         className='absolute top-1.5 right-1.5'/>
-                                    <LazyLink onClick={handleHideDropdown} 
+                                    <LazyLink onClick={() => {handleHideDropdown()
+                                            toast.loading('Loading', {
+                                                id: 'loading',
+                                                duration: 5000
+                                            })
+                                        }} 
                                         href='/create_blog'>Create</LazyLink>
-                                        <LazyLink onClick={handleHideDropdown}
+                                        <LazyLink onClick={() => {handleHideDropdown() 
+                                                toast.loading('Loading', {
+                                                    id: 'loading',
+                                                    duration: 5000
+                                                })    
+                                            }}
                                         href='/dashboard'>Dashboard</LazyLink>
                                     <button onClick={
                                             () => {
@@ -84,16 +103,32 @@ const Navbar = () => {
                    w-fit text-white z-]-1] border-none outline-none
                    rounded-bl-xl`}>
 
-                    <Link href={'/'} onClick={() => handleShowMenu()}>Home</Link>
+                    <Link href={'/'} onClick={() => {
+                        handleShowMenu()
+                        toast.loading('Loading', {
+                            id: 'loading',
+                            duration: 5000
+                        })
+                        }}>Home</Link>
                     {
                     session?.user ? (
                         <div>
                         {
                             showDropdown && (
                                 <div className='flex flex-col items-start gap-y-4 rounded-md cursor-pointer'>
-                                    <LazyLink onClick={handleHideDropdown} 
+                                    <LazyLink onClick={() => {handleHideDropdown() 
+                                                toast.loading('Loading', {
+                                                    id: 'loading',
+                                                    duration: 5000
+                                                })    
+                                            }}
                                         href='/create_blog'>Create</LazyLink>
-                                    <LazyLink onClick={handleHideDropdown}
+                                    <LazyLink onClick={() => {handleHideDropdown() 
+                                                toast.loading('Loading', {
+                                                    id: 'loading',
+                                                    duration: 5000
+                                                })    
+                                            }}
                                         href='/dashboard'>Dashboard</LazyLink>
                                     <button onClick={
                                             () => {
@@ -109,7 +144,14 @@ const Navbar = () => {
                         } </div>
                     ) : (
                         <>
-                            <LazyLink href='/register' onClick={() => handleShowMenu()}>Register</LazyLink>
+                            <LazyLink href='/register' 
+                                onClick={() => {handleShowMenu() 
+                                    toast.loading('Loading', {
+                                        id: 'loading',
+                                        duration: 5000
+                                    })    
+                                }}
+                           >Register</LazyLink>
                             <button
                                className='outline-none border-none p-0 text-md text-white text-start'
                                onClick={() => {

@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import { mongooseConnect } from '@/lib/mongoose';
 import { Blog } from '@/models/Blog';
 import { Useri } from '@/models/Useri';
+import { toast } from 'react-hot-toast';
 const LazyLink = dynamic(() => import('next/link'), { ssr: true });
 
 export default async function Home(){
@@ -48,7 +49,9 @@ export default async function Home(){
           </div>
           <div className='flex flex-col gap-2'>
             <h1 className='font-extrabold text-[2rem] text-[$777]'>Interesting Topics:</h1>
-            <LazyLink href='/topic/Nature' className='border-2 p-3 hover:bg-gray-100 rounded-md font-semibold text-md'>
+            <LazyLink href='/topic/Nature'
+              // onClick={toast.loading('Loading')}
+            className='border-2 p-3 hover:bg-gray-100 rounded-md font-semibold text-md'>
               Nature
             </LazyLink>
             <LazyLink href='/topic/Tech' className='border-2 p-3 hover:bg-gray-100 rounded-md font-semibold text-md'>
