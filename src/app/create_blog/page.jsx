@@ -2,7 +2,7 @@
 import {useSession} from 'next-auth/react';
 import {useRouter} from 'next/navigation';
 import React, {useEffect, useState} from 'react'
-import {AiOutlineFileImage} from 'react-icons/ai'
+import {AiOutlineUpload} from 'react-icons/ai'
 import {toast} from 'react-toastify';
 
 const CreateBlog = () => {
@@ -106,38 +106,38 @@ const CreateBlog = () => {
                 className='flex flex-col grow-1 gap-5 shadow-md py-5 px-5 rounded-xl 
                 w-fit items-start mt-20'
             >
-                <h2 className='font-extrabold text-3xl mb-2 text-[#55B1DF]'>Create Post</h2>
+                <h2 className='font-extrabold text-3xl mb-2 text-[#45c6a6]'>Create Post</h2>
                 <input type="text" placeholder='Title'
                     onChange={
                         e => setTitle(e.target.value)
                     }
                     className=' rounded-2xl py-2 px-5 border border-[#ccc]
-                    hover:border-[#55B1DF] outline-none' 
+                    hover:border-[#45c6a6] outline-none' 
                 />
                 <input type="text" placeholder='Summary'
                     onChange={
                         e => setSummary(e.target.value)
                     }
                     className=' rounded-2xl py-2 px-5 border border-[#ccc]
-                    hover:border-[#55B1DF] outline-none' 
+                    hover:border-[#45c6a6] outline-none' 
                 />
                 <input type="text" placeholder='Caption'
                     onChange={
                         e => setCaption(e.target.value)
                     }
                     className=' rounded-2xl py-2 px-5 border border-[#ccc]
-                    hover:border-[#55B1DF] outline-none' 
+                    hover:border-[#45c6a6] outline-none' 
                 />
                 <textarea type="text" placeholder='Body'
                     onChange={
                         e => setDesc(e.target.value)
                     }
                     className=' rounded-2xl py-2 px-5 border border-[#ccc]
-                    hover:border-[#55B1DF] outline-none w-full' 
+                    hover:border-[#45c6a6] outline-none w-full' 
                 />
                 <select value={category}
                      className=' rounded-2xl py-2 px-5 border border-[#ccc]
-                     hover:border-[#55B1DF] outline-none cursor-pointer' 
+                     hover:border-[#45c6a6] outline-none cursor-pointer' 
                     onChange={
                         e => setCategory(e.target.value)
                 }>
@@ -149,12 +149,15 @@ const CreateBlog = () => {
                 </select>
                 <label
                      htmlFor="image" 
-                    className='flex items-center gap-1 bg-[#55B1DF] rounded-2xl py-2 px-4
-                    text-white font-bold text-sm  border border-sky-500
-                    hover:text-[#55B1DF] hover:bg-white cursor-pointer'
+                    className='flex items-center gap-1 rounded-2xl py-2 px-4
+                    font-bold text-sm  border
+                    text-[#45c6a6] border-[#45c6a6]
+                    hover:text-white hover:bg-[#45c6a6] 
+                    ease-in-out duration-1000
+                    cursor-pointer'
                 >
                     Upload Image
-                    <AiOutlineFileImage className='' />
+                    <AiOutlineUpload className='' />
                 </label>
                 <input id='image' type="file" className='hidden'
                     onChange={
@@ -162,10 +165,15 @@ const CreateBlog = () => {
                     }/>
                 <button 
                     type='submit'
-                    className='bg-[#55B1DF] rounded-2xl py-2 px-8
-                 text-white font-bold text-sm  border border-sky-500
-                 hover:text-[#55B1DF] hover:bg-white'
-                >Create Blog</button>
+                    className='flex items-center gap-1 rounded-2xl py-2 px-8
+                    font-bold text-sm  border
+                    text-[#45c6a6] border-[#45c6a6]
+                    hover:text-white hover:bg-[#45c6a6] 
+                    ease-in-out duration-1000
+                    cursor-pointer'
+                >
+                    Create Blog
+                </button>
             </form>
         </section>
     )

@@ -64,21 +64,25 @@ const HeroBanner = ({blogs}) => {
               
             <figure
             className='w-full h-fit rounded-2xl bg-center bg-cover duration-500 shadow '>
-            <div  className='hidden group-hover:block absolute top-[50%] translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black
-            text-white cursor-pointer'>
+            <div  className='hidden group-hover:block absolute top-[50%] translate-x-0 translate-y-[-50%]
+                 left-5 text-2xl rounded-full p-2 bg-black
+                text-white cursor-pointer'>
              <BsChevronCompactLeft size={30} onClick={() => handleChangeImg('dec')}/>
              </div>
-            <div className='hidden group-hover:block absolute top-[50%] translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black
-            text-white cursor-pointer'>
+            <div className='hidden group-hover:block absolute top-[50%] translate-x-0 translate-y-[-50%]
+                right-5 text-2xl rounded-full p-2 bg-black
+                text-white cursor-pointer'>
                 <BsChevronCompactRight size={30} onClick={() => handleChangeImg('inc')}/>
              </div>
                 <img 
                     src={blogs[currentImg]?.imgUrl}
-                    className='w-[450px] h-[400px] md:w-screen md:h-[600px] object-cover objectFit="contain mb-2 rounded-tr-xl rounded-tl-xl z-0'
+                    className='w-[450px] h-[400px] md:w-screen md:h-[600px] object-cover mb-2 rounded-tr-xl rounded-tl-xl z-0'
                 />
-                <figcaption className='p-6 '>
+                <figcaption className='p-6 flex flex-col justify-between gap-3'>
                     <LazyLink  href={`/blog/${blogs[currentImg]?._id}`}
-                     className='font-extrabold text-xl uppercase'>
+                     className='font-extrabold text-xl uppercase
+                      hover:text-[#45c6a6] ease-in-out duration-1000
+                     '>
                     {blogs[currentImg]?.title}
 
                     </LazyLink>
@@ -97,9 +101,12 @@ const HeroBanner = ({blogs}) => {
               )}
           
         </div>
-        <div className='flex mt-20 justify-center py-2'>
+        <div className='flex mt-2 md:mt-20 justify-center py-2'>
             {blogs?.map((blog, blogIndex) => (
-                <div key={blogIndex} className='text-3xl cursor-pointer'>
+                <div key={blogIndex} className={`text-3xl cursor-pointer hover:text-[#45c6a6] 
+                  transition-colors
+                  ease-in-out duration-700 ${currentImg === blogIndex ? 'text-[#45c6a6]' : ''}
+                `}>
                 <RxDotFilled onClick={() => setCurrentImg(blogIndex)} />
                 </div>
             ))}

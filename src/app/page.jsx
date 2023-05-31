@@ -5,8 +5,7 @@ import dynamic from 'next/dynamic';
 import { mongooseConnect } from '@/lib/mongoose';
 import { Blog } from '@/models/Blog';
 import { Useri } from '@/models/Useri';
-import { toast } from 'react-hot-toast';
-const LazyLink = dynamic(() => import('next/link'), { ssr: true });
+import AsideComponent from '@/components/asideComponent/AsideComponent';
 
 export default async function Home(){
   // const blogs = await fetchBlogs();
@@ -20,7 +19,7 @@ export default async function Home(){
       likes: 1,
       authorId: 1,
       createdAt: 1
-   }).sort({createdAt: -1}).limit(5).populate({
+   }).sort({createdAt: -1}).limit(10).populate({
        path: "authorId", 
        select: 'username',
         model: Useri
@@ -33,40 +32,23 @@ export default async function Home(){
   const blogs = await fetchBlogs()
  
   return (
-    <section className=' flex flex-col w-full my-7 p-4'>
+    <section className='flex flex-col w-full my-7 p-4'>
       
-      <HeroBanner blogs={blogs} />
+      <header>
+        <HeroBanner blogs={blogs} />
+      </header>
       
       
-        <main className='h-full w-[70%] my-0 mx-auto mt-10 flex flex-wrap-reverse justify-between'>
-          <div className='flex flex-col gap-2'>
-
-          <h1 className='font-extrabold text-[2rem] text-[$777]'>Recent Posts</h1>
-
+      <main className='h-full w-[70%] my-0 mx-auto mt-10 flex flex-col'>
+          <h1 className='font-semibold text-[2rem] mb-2'>Recent Posts</h1>
+        <div className='flex md:flex-row flex-col justify-between gap-5'>
+          <div className='flex flex-col gap-12'>
            {blogs?.length > 0 ? blogs?.map((blog) => (
-          <BlogCard key={blog._id} blog={blog} />
-          )) : <h1>There are no blogs available at the moment</h1>}
+             <BlogCard key={blog._id} blog={blog} />
+             )) : <h1>There are no blogs available at the moment</h1>}
           </div>
-          <div className='flex flex-col gap-2'>
-            <h1 className='font-extrabold text-[2rem] text-[$777]'>Interesting Topics:</h1>
-            <LazyLink href='/topic/Nature'
-              // onClick={toast.loading('Loading')}
-            className='border-2 p-3 hover:bg-gray-100 rounded-md font-semibold text-md'>
-              Nature
-            </LazyLink>
-            <LazyLink href='/topic/Tech' className='border-2 p-3 hover:bg-gray-100 rounded-md font-semibold text-md'>
-              Tech
-            </LazyLink>
-            <LazyLink href='/topic/Food' className='border-2 p-3 hover:bg-gray-100 rounded-md font-semibold text-md'>
-              Food
-            </LazyLink>
-            <LazyLink href='/topic/Gym' className='border-2 p-3 hover:bg-gray-100 rounded-md font-semibold text-md'>
-              Gym
-            </LazyLink>
-            <LazyLink href='/topic/Health' className='border-2 p-3 hover:bg-gray-100 rounded-md font-semibold text-md'>
-              Health
-            </LazyLink>
-          </div>
+          <AsideComponent />
+        </div>
       </main>
       
       

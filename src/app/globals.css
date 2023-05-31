@@ -22,3 +22,13 @@ a{
 .wrapper{
   @apply h-full w-[85%] my-0 mx-auto mt-10 flex flex-col gap-10;
 }
+
+.social{
+  @apply rounded-full border-2 border-[#45c6a6] p-2 min-h-[40px] flex items-center text-[#45c6a6];
+  @apply hover:bg-[#45c6a6] hover:text-white cursor-pointer ease-in-out duration-500;
+}
+
+.home{
+  @apply h-full w-[70%] my-0 mx-auto mt-10 flex md:flex-row flex-col justify-between;
+  @apply gap-5;
+}

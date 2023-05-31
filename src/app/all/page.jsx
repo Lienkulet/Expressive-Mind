@@ -1,4 +1,5 @@
 
+import AsideComponent from '@/components/asideComponent/AsideComponent';
 import BlogCard from '@/components/blogCard/BlogCard';
 import { mongooseConnect } from '@/lib/mongoose';
 import { Blog } from '@/models/Blog';
@@ -26,12 +27,12 @@ const AllBlogs = async() => {
       likes: 1,
       authorId: 1,
       createdAt: 1
-   }).sort({createdAt: -1}).limit(5).populate({
+   }).sort({createdAt: -1}).limit(20).populate({
        path: "authorId", 
        select: 'username',
         model: Useri
       });
-      console.log(blox.length);
+      // console.log(blox.length);
 
       return JSON.parse(JSON.stringify(blox));
   }
@@ -40,14 +41,18 @@ const AllBlogs = async() => {
 
 
   return (
-    <section className='mt-16 px-28 py-16'>
-      <h1 className='font-extrabold text-2xl'>
-            All Blogs
-        </h1>
-      <main className='flex flex-wrap gap-4 mt-5'>
-            {blogs?.length > 0 ? blogs.map((blog) => (
-                <BlogCard key={blog._id} blog={blog} />
-                )) : <h1>There are no blogs available at the moment</h1>}
+    // <section className='mt-16 px-28 py-16'>
+    <section className='flex flex-col w-full my-7 mt-16 p-4'>
+      <main className='h-full w-[70%] my-0 mx-auto flex flex-col'>
+          <h1 className='font-semibold text-[2rem] mb-2'>All Blogs</h1>
+        <div className='flex md:flex-row flex-col justify-between gap-5'>
+          <div className='flex flex-col gap-12'>
+           {blogs?.length > 0 ? blogs?.map((blog) => (
+             <BlogCard key={blog._id} blog={blog} />
+             )) : <h1>There are no blogs available at the moment</h1>}
+          </div>
+          <AsideComponent />
+        </div>
       </main>
     </section>
   )

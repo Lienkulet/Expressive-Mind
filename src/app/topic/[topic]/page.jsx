@@ -1,5 +1,6 @@
 'use client'
 
+import AsideComponent from '@/components/asideComponent/AsideComponent';
 import BlogCard from '@/components/blogCard/BlogCard';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
@@ -22,33 +23,18 @@ const Topic = (ctx) => {
   return (
     <section className='mt-16 px-28 py-16'>
         
-        {
-            loading? (
-                <div className='flex items-center justify-center mt-16'>
-                    <CircleLoader size={150} color='#005B6B' />
-                </div>
-            ) : (
-                <>
-                <h1 className='font-extrabold text-2xl'>
-            {ctx.params.topic} Blogs
-        </h1>
-            <div className='flex flex-wrap gap-4 mt-5'>
-            {
-                blogs.length > 0 && blogs.map((blog) => (
-                    <BlogCard key={blog._id} blog={blog} />
-                    ))
-                }
+        <main className='h-full w-[70%] my-0 mx-auto mt-10 flex flex-col'>
+          <h1 className='font-semibold text-[2rem] mb-2'>{ctx.params.topic} Blogs</h1>
+        <div className='flex md:flex-row flex-col justify-between gap-5'>
+          <div className='flex flex-col gap-12'>
+           {blogs?.length > 0 ? blogs?.map((blog) => (
+             <BlogCard key={blog._id} blog={blog} />
+             )) : <h1>There are no blogs available at the moment</h1>}
+          </div>
+          <AsideComponent />
         </div>
-                </>
-            )
-        }
-        {
-            !loading && blogs.length <= 0 && (
-                <div className='flex items-center justify-center mt-4'>
-                    <h1>There are 0 blogs about this topic</h1>    
-                </div>
-            )
-        }
+      </main>                   
+        
     </section>
   )
 }

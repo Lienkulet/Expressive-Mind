@@ -3,8 +3,8 @@
 import { useSession } from 'next-auth/react';
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
-import {AiFillHeart, AiOutlineCalendar, AiOutlineHeart} from 'react-icons/ai';
-import { MdOutlineAccountCircle } from 'react-icons/md';
+import {AiFillHeart, AiOutlineHeart} from 'react-icons/ai';
+import { MdOutlineWatchLater } from 'react-icons/md';
 import { format } from 'timeago.js';
 import dynamic from 'next/dynamic';
 
@@ -55,70 +55,74 @@ const BlogCard = ({
     }
 
     return (
-        <div className='h-[350px] max-h-[350px] md:w-[800px] shadow-md transition-[150ms] rounded-2xl
-                      hover:shadow-lg'>
-            <div className=' h-full flex md:flex-row flex-col'>
-                <LazyLink href={`/blog/${_id}`}>
+        <article className='h-[750px] max-w-[800px]
+                         shadow-md transition-[150ms] hover:shadow-lg
+                         border-2 border-[#45c6a6] p-6
+                         flex flex-col
+                         '>
+            <header className=''>
                     <Image 
                         src={imgUrl}
                         alt={title}
                         width={450}
                         height={350}
-                        className='object-cover rounded-2xl md:rounded-tr-none
-                         md:rounded-br-none w-[450px] max-h-[350px] my-0 h-full
-                        hover:shadow-lg mx-auto'
+                        className='object-cover w-full max-h-[400px] my-0 h-full mx-auto'
                     />
-                </LazyLink>
-                <div className='ml-3 p-5 flex flex-col justify-between w-[80%]'>
-                    <div>
-                        <h3 className='text-3xl text-[#005B6B] font-extrabold'>{title}</h3>
-                    <div className='text-[#777]  flex flex-wrap justify-between'>
-                        <span className='flex flex-row gap-2 items-center'>
-                            <MdOutlineAccountCircle  size={'1rem'} />
-                            {authorId?.username}
-                        </span>
-                        <time className='flex flex-row gap-2 items-center'>
-                            <AiOutlineCalendar size={'1rem'} />
-                            {format(createdAt)}
-                        </time>
-                    </div>
-                        <p className='mt-5 text-md'>{summary}</p>
-                    </div>
+            </header>
+                <main className='h-full mt-6 flex flex-col  gap-3'>
+                        <LazyLink href={`/blog/${_id}`} 
+                            className='text-2xl font-semibold
+                                hover:text-[#45c6a6] ease-in-out duration-1000
+                            '>
+                                {title}
+                        </LazyLink>
+
+                        <p className='text-md'>{summary}</p>
+
+                        <LazyLink href={`/blog/${_id}`}
+                         className='py-2 px-3 rounded-2xl border-2  w-fit
+                         border-[#45c6a6] text-[#45c6a6]
+                         hover:bg-[#45c6a6] hover:font-bold hover:text-white
+                         ease-in-out duration-1000
+                         '>
+                            Read More
+                        </LazyLink>
                     
-                    <footer className='flex flex-end justify-between items-end 
+                    
+                </main>
+                <footer className='flex flex-end justify-between items-center 
                                     relative bottom-0'>
-                        <div className='text-2xl 
-                            cursor-pointer flex items-center gap-2'>
-                        
-                            {blogLikes} 
-                            {" "}
-                            {session? (
+                        <div className='text-[#777] gap-2 items-center flex flex-wrap justify-between'>
+                            
+                            <time className='flex flex-row gap-1 items-center'>
+                                <MdOutlineWatchLater fill='#45c6a6' size={'1.25rem'} />
+                                {format(createdAt)}
+                            </time>
+                            <span className='text-[#45c6a6] flex flex-row '>
+                                by {authorId?.username}
+                            </span>
+                        </div>
+                        <div className='text-md
+                            cursor-pointer flex items-center gap-1'>
+                        {session? (
                                 <>
                                 {
                                     isLiked ? (
-                                        <AiFillHeart fill='red' onClick={handleLike} size={20}/>
+                                        <AiFillHeart fill='#45c6a6' onClick={handleLike} size={'1rem'}/>
                                     ) : (
-                                        <AiOutlineHeart fill='red' onClick={handleLike} size={20}/>
+                                        <AiOutlineHeart fill='#45c6a6' onClick={handleLike} size={'1rem'}/>
                                     )
                                     }
                                 </>
                             ) : (
-                                <AiFillHeart fill='red' size={20}/>
+                                <AiFillHeart fill='#45c6a6' size={'1rem'}/>
                             ) 
                              }
-                            
-                        
+                            {blogLikes} 
                     </div>
-                        <LazyLink href={`/blog/${_id}`}
-                         className='py-2 px-3 rounded-2xl border-2 
-                         border-[#005B6B] hover:font-bold text-[#005B6B]'>
-                            Read More
-                        </LazyLink>
+                        
                     </footer>
-                </div>
-                
-            </div>
-        </div>
+        </article>
     )
 }
 

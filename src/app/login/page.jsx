@@ -44,7 +44,7 @@ const Login = () => {
 
   return (
     <section className="w-full h-screen bg-[#CCCCCC] flex flex-col">
-    <article className='flex flex-col m-auto w-fit justify-center text-[#55B1DF]
+    <article className='flex flex-col m-auto w-fit justify-center text-[#45c6a6]
       items-center gap-10 bg-[#FFFFFF] py-8 px-5 
       min-w-[360px] rounded-xl shadow-md'>
       <h2 className='font-extrabold text-3xl'>Log In</h2>
@@ -54,22 +54,22 @@ const Login = () => {
           placeholder='Email...'
           onChange={e => setEmail(e.target.value)}   
           className='rounded-2xl py-2 px-5 border border-[#ccc]
-          hover:border-[#55B1DF] outline-none text-lg'   
+          hover:border-[#45c6a6] outline-none text-lg'   
         />
         <input 
           type="password"
           placeholder='Password'
           onChange={e => setPassword(e.target.value)} 
           className='rounded-2xl py-2 px-5 border border-[#ccc]
-          hover:border-[#55B1DF] outline-none'   
+          hover:border-[#45c6a6] outline-none'   
         />
         <div className='flex justify-between items-center mt-9'>
           <Link href='/register' className='text-sm hover:text-gray-400'>
             Register
           </Link>
-          <button className='bg-[#55B1DF] rounded-2xl py-2 px-8
+          <button className='bg-[#45c6a6] rounded-2xl py-2 px-8
            text-white font-bold text-sm border border-sky-500
-           hover:text-[#55B1DF] hover:bg-white'
+           hover:text-[#45c6a6] hover:bg-white'
           >Log in</button>
         </div>
       </form>

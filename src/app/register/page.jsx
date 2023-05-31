@@ -43,7 +43,7 @@ const Register = () => {
     
     return (
         <section className="w-full h-screen bg-[#CCCCCC] flex flex-col ">
-            <div className='flex flex-col m-auto w-fit justify-center text-[#55B1DF]
+            <div className='flex flex-col m-auto w-fit justify-center text-[#45c6a6]
                                     items-center gap-5 bg-[#FFFFFF] py-4 px-1
                                     min-w-[330px] rounded-2xl shadow-md'>
                 <h2 className='font-extrabold text-3xl'>Create an Account</h2>
@@ -55,27 +55,27 @@ const Register = () => {
                         placeholder='Username' 
                         onChange={e => setUsername(e.target.value)}
                         className='rounded-2xl py-2 px-5 border border-[#ccc]
-                    hover:border-[#55B1DF] outline-none text-lg' 
+                    hover:border-[#45c6a6] outline-none text-lg' 
                     />
                     <input
                         type="email"
                         placeholder='Email' 
                         onChange={e => setEmail(e.target.value)}
                         className='rounded-2xl py-2 px-5 border border-[#ccc]
-                    hover:border-[#55B1DF] outline-none text-lg'   
+                    hover:border-[#45c6a6] outline-none text-lg'   
                     />
                     <input
                         type="password"
                         placeholder='Password' 
                         onChange={e => setPassword(e.target.value)}
                         className='rounded-2xl py-2 px-5 border border-[#ccc]
-                    hover:border-[#55B1DF] outline-none text-lg'   
+                    hover:border-[#45c6a6] outline-none text-lg'   
                     />
                     <button 
                         type='submit'
-                        className='bg-[#55B1DF] rounded-2xl py-2 px-8
+                        className='bg-[#45c6a6] rounded-2xl py-2 px-8
                         text-white font-bold text-sm  border border-sky-500
-                        hover:text-[#55B1DF] hover:bg-white'
+                        hover:text-[#45c6a6] hover:bg-white'
                     >Register</button>
                 </form>
             </div>

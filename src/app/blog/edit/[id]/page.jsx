@@ -111,7 +111,7 @@ const uploadImage = async () => {
     <section className='grid place-items-center min-h-screen'>
         {loading ? ( 
             <div className='flex items-center justify-center mt-16'>
-                    <CircleLoader size={150} color='#005B6B' />
+                    <CircleLoader size={150} color='#45c6a6' />
                 </div>
         ) : (
         <form onSubmit={
@@ -120,7 +120,7 @@ const uploadImage = async () => {
                 className='flex flex-col grow-1 gap-5 shadow-md py-5 px-5 rounded-xl 
                 w-fit items-start mt-20'
             >
-                <h2 className='font-extrabold text-3xl mb-2 text-[#55B1DF]'>Update Post</h2>
+                <h2 className='font-extrabold text-3xl mb-2 text-[#45c6a6]'>Update Post</h2>
                 <label className='flex flex-col gap-1 w-full'>
                     <h1 className='text-md font-bold'>Title:</h1>
                 <input type="text" placeholder='Title'
@@ -129,7 +129,7 @@ const uploadImage = async () => {
                         e => setTitle(e.target.value)
                     }
                     className=' rounded-md py-2 px-5 border border-[#ccc]
-                    hover:border-[#55B1DF] outline-none' 
+                    hover:border-[#45c6a6] outline-none' 
                 />
                 </label>
                 <label className='flex flex-col gap-1 w-full'>
@@ -140,7 +140,7 @@ const uploadImage = async () => {
                         e => setSummary(e.target.value)
                     }
                     className=' rounded-md py-2 px-5 border border-[#ccc]
-                    hover:border-[#55B1DF] outline-none' 
+                    hover:border-[#45c6a6] outline-none' 
                 />
                 </label>
                 <label className='flex flex-col gap-1 w-full'>
@@ -151,7 +151,7 @@ const uploadImage = async () => {
                         e => setCaption(e.target.value)
                     }
                     className=' rounded-md py-2 px-5 border border-[#ccc]
-                    hover:border-[#55B1DF] outline-none' 
+                    hover:border-[#45c6a6] outline-none' 
                 />
                 </label>
                 <label className='flex flex-col gap-1 w-full'>
@@ -162,14 +162,14 @@ const uploadImage = async () => {
                         e => setDesc(e.target.value)
                     }
                     className=' rounded-md py-2 px-5 border border-[#ccc]
-                    hover:border-[#55B1DF] outline-none w-full' 
+                    hover:border-[#45c6a6] outline-none w-full' 
                 />
                 </label>
                 <label className='flex flex-col gap-1 w-full'>
                 <h1 className='text-md font-bold'>Category:</h1>
                 <select value={category}
                      className=' rounded-md py-2 px-5 border border-[#ccc]
-                     hover:border-[#55B1DF] outline-none cursor-pointer w-full' 
+                     hover:border-[#45c6a6] outline-none cursor-pointer w-full' 
                     onChange={
                         e => setCategory(e.target.value)
                 }>
@@ -182,9 +182,9 @@ const uploadImage = async () => {
                 </label>
                 <label
                      htmlFor="image" 
-                    className='flex items-center gap-1 bg-[#55B1DF] rounded-md py-2 px-4
+                    className='flex items-center gap-1 bg-[#45c6a6] rounded-md py-2 px-4
                     text-white font-bold text-sm  border border-sky-500 justify-center
-                    hover:text-[#55B1DF] hover:bg-white cursor-pointer w-full '
+                    hover:text-[#45c6a6] hover:bg-white cursor-pointer w-full '
                 >
                     Change Image
                     <AiOutlineFileImage />
@@ -196,9 +196,9 @@ const uploadImage = async () => {
                     }/>
                 <button 
                     type='submit'
-                    className='bg-[#55B1DF] rounded-md py-2 px-8
+                    className='bg-[#45c6a6] rounded-md py-2 px-8
                  text-white font-bold text-sm  border border-sky-500
-                 hover:text-[#55B1DF] hover:bg-white w-full'
+                 hover:text-[#45c6a6] hover:bg-white w-full'
                 >Update Blog</button>
             </form>
         )

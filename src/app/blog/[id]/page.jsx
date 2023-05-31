@@ -12,10 +12,12 @@ import {
     AiFillHeart,
     AiOutlineHeart,
 } from 'react-icons/ai';
-import {BsDot, BsFillPencilFill} from 'react-icons/bs';
+import { CgQuote } from 'react-icons/cg'
+import { BsFillPencilFill} from 'react-icons/bs';
 import { CircleLoader } from 'react-spinners';
 import {format} from 'timeago.js';
 import dynamic from 'next/dynamic';
+import { MdOutlineWatchLater } from 'react-icons/md';
 
 const LazyLink = dynamic(() => import('next/link'), {ssr: false});
 
@@ -130,18 +132,31 @@ const BlogDetails = (ctx) => {
     }
 
     return (
-        <>
+      <>
         {loading ? (
           <article className='flex items-center justify-center mt-28'>
-            <CircleLoader size={150} color='#005B6B' />
+            <CircleLoader size={150} color='#45c6a6' />
           </article>
         ) : (
-          <article className='my-6 md:p-20 p-5 m-auto max-w-[900px] flex flex-col w-screen h-fit bg-gray-100'>
-            <header className='flex justify-between items-center text-gray-400'>
-              <address className='flex items-center line-clamp-2 text-sm font-bold'>
-                {blogDetails?.authorId?.username}
-                <BsDot />
-                <time>{format(blogDetails?.createdAt)}</time>
+          <article className='my-6 md:p-20 p-5 m-auto max-w-[900px] flex flex-col w-screen h-fit'>
+            
+            <figure className='flex flex-col gap-5 my-5'>
+              <Image
+                src={blogDetails?.imgUrl}
+                alt={blogDetails?.title}
+                width={800}
+                height={300}
+                className='rounded-md object-cover max-h-[500px] w-full'
+              />
+              <figcaption  className='flex justify-between items-center text-gray-400'>
+            <address className='text-[#777] gap-2 items-center flex flex-wrap justify-between'>
+                  <time className='flex flex-row gap-1 items-center'>
+                              <MdOutlineWatchLater fill='#45c6a6' size={'1.25rem'} />
+                              {format(blogDetails?.createdAt)}
+                  </time>
+                  <span className='text-[#45c6a6] flex flex-row '>
+                              by {blogDetails?.authorId?.username}
+                  </span>
               </address>
               <nav className='ml-auto'>
                 {blogDetails?.authorId?._id.toString() === session?.user?._id ? (
@@ -149,7 +164,9 @@ const BlogDetails = (ctx) => {
                     <li>
                       <LazyLink
                         href={`/blog/edit/${blogDetails?._id}`}
-                        className='flex gap-2 items-center'
+                        className='flex gap-2 items-center 
+                          hover:text-[#45c6a6] ease-in-out duration-700
+                        '
                       >
                         <BsFillPencilFill />
                         Edit
@@ -158,7 +175,9 @@ const BlogDetails = (ctx) => {
                     <li>
                       <button
                         onClick={handleDelete}
-                        className='flex gap-2 items-center'
+                        className='flex gap-2 items-center 
+                        hover:text-[#red] ease-in-out duration-700
+                        '
                       >
                         <AiFillDelete />
                         Delete
@@ -169,27 +188,21 @@ const BlogDetails = (ctx) => {
                   ''
                 )}
               </nav>
-            </header>
-            <section className='flex flex-col my-5 gap-5'>
-              <h1 className='text-2xl font-bold'>{blogDetails?.title}</h1>
-              <p className='text-md font-bold'>{blogDetails?.summary}</p>
-            </section>
-            <figure className='flex flex-col gap-5 my-5'>
-              <Image
-                src={blogDetails?.imgUrl}
-                alt={blogDetails?.title}
-                width={800}
-                height={300}
-                className='rounded-md'
-              />
-              <figcaption className='font-bold text-md'>
-                {blogDetails?.caption}
+              
               </figcaption>
             </figure>
+            <header className='flex flex-col items-center justify-center my-5 gap-5'>
+              <h1 className='text-2xl font-bold'>{blogDetails?.title}</h1>
+              <h1 className='text-lg text-[#777] font-medium flex flex-row'>
+                <CgQuote />
+                {blogDetails?.caption}
+                <CgQuote />
+                </h1>
+            </header>
             <main>
             <p className="whitespace-pre-line">{blogDetails?.desc}</p>
             </main>
-            <footer className='my-5 border-y-2 py-5'>
+            <footer className='my-5 border-y-2 border-[#45c6a6] py-5'>
               <ul className='flex flex-wrap items-center justify-between'>
                 <li className='flex flex-wrap items-center gap-5'>
                   <h6 className='flex flex-row items-center gap-2'>
@@ -198,13 +211,13 @@ const BlogDetails = (ctx) => {
                       <AiFillHeart
                         size={20}
                         onClick={handleLike}
-                        className='text-red-500 cursor-pointer'
+                        className='text-[#45c6a6] cursor-pointer'
                       />
                     ) : (
                       <AiOutlineHeart
                         size={20}
                         onClick={handleLike}
-                        className='text-red-500 cursor-pointer'
+                        className='text-[#45c6a6] cursor-pointer'
                       />
                     )}
                   </h6>
@@ -212,8 +225,9 @@ const BlogDetails = (ctx) => {
                     {comments?.length} comments
                   </h6>
                 </li>
-                <li>
-                  <h6>Category: {blogDetails?.category}</h6>
+                <li className='flex flex-row items-center gap-1'>
+                  <h6>Category: </h6>
+                  <h6 className='text-[#45c6a6] font-bold'> {blogDetails?.category}</h6>
                 </li>
               </ul>
             </footer>
@@ -224,42 +238,57 @@ const BlogDetails = (ctx) => {
               >
                 <h1 className='font-bold text-lg'>Leave a thought:</h1>
                 <label className='flex flex-col gap-2'>
-                  <h2>Title:</h2>
+                  <h2 className='font-medium'>Title:</h2>
                   <input
                     type='text'
                     value={commentTitle}
-                    className='w-full p-2 rounded-md'
+                    className='w-full p-2 rounded-md bg-gray-200 outline-[#45c6a6]'
                     placeholder='Title'
                     onChange={(e) => setCommentTitle(e.target.value)}
                   />
                 </label>
                 <label className='flex flex-col gap-2'>
-                  <h2>Message:</h2>
+                  <h2 className='font-medium'>Message:</h2>
                   <textarea
                     value={commentDesc}
-                    className='w-full p-2 rounded-md min-h-[50px] max-h-[150px]'
+                    className='w-full p-2 rounded-md min-h-[50px] max-h-[150px] 
+                      bg-gray-200 outline-[#45c6a6]'
                     placeholder='Message...'
                     onChange={(e) => setCommentDesc(e.target.value)}
                   />
                 </label>
-                <button className='py-2 px-3 border-2 w-full bg-[#005B6B] rounded-md text-white'>
+                <button className='py-2 px-3 border-2 w-full 
+                  rounded-md border-[#45c6a6] text-[#45c6a6]
+                  hover:bg-[#45c6a6] hover:text-white ease-in-out duration-700
+                 '>
                   Post
                 </button>
               </form>
-              <div className='flex flex-col w-full'>
-                {commentsLoading && <div><CircleLoader /></div>}
-                {comments.length > 0 ? (
-                  comments.map((comment) => (
+              
+                {commentsLoading && <div className='flex justify-center items-center mt-4 w-full'>
+                    <CircleLoader color='#45c6a6' />
+                    </div>
+                }
+                { comments.length > 0 ? (
+                  <div className='flex flex-col w-full items-center '>
+                    <header className='flex  text-center border-b-2 
+                            border-[#45c6a6] py-2 px-14'>
+                         <h1 className='font-semibold text-lg text-center'>Comments</h1>
+                    </header>
+                    <div className='flex flex-col items-start w-full mt-4'>
+                    {comments.map((comment) => (
                     <Comment key={comment._id} comment={comment} />
-                  ))
-                ) : (
+                       ))}
+                   </div>
+                  </div>
+                )
+                : (
                   <div className='flex justify-center items-center mt-4'>
                     <h1>There are no comments yet</h1>
                   </div>
                 )}
-              </div>
-            </div>
-          </article>
+                </div>
+                </article>
         )}
       </>
     )
