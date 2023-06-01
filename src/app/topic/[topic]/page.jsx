@@ -21,7 +21,7 @@ const Topic = (ctx) => {
 
 
   return (
-    <section className='mt-16 px-28 py-16'>
+    <section className='mt-16 md:px-28 py-16'>
         
         <main className='h-full w-[70%] my-0 mx-auto mt-10 flex flex-col'>
           <h1 className='font-semibold text-[2rem] mb-2'>{ctx.params.topic} Blogs</h1>

@@ -18,7 +18,7 @@ const Navbar = () => {
 
     const handleShowDropdown = () => setShowDropdown(prev => !prev)
 
-    const handleHideDropdown = () => setShowDropdown(prev => false)
+    const handleHideDropdown = () => setShowDropdown(false)
 
     const handleShowMenu = () => {
         setShowShowMenu(prev => !prev);
@@ -87,18 +87,18 @@ const Navbar = () => {
                                 className='object-cover rounded-[50%] cursor-pointer'
                                 onClick={handleShowDropdown}/> {
                             showDropdown && (
-                                <div className='absolute bg-[#45c6a6] p-3 mr-6 flex flex-col items-start gap-2 top-11 right-[-3rem] 
+                                <div className='md:flex hidden absolute bg-[#45c6a6] p-3 mr-6 flex-col items-start gap-2 top-11 right-[-3rem] 
                                        text-white rounded-md cursor-pointer'>
-                                    <AiOutlineClose onClick={handleHideDropdown}
+                                    <AiOutlineClose onClick={handleShowDropdown}
                                         className='absolute top-1.5 right-1.5'/>
-                                    <LazyLink onClick={() => {handleHideDropdown()
+                                    <LazyLink onClick={() => {handleShowDropdown()
                                             toast.loading('Loading', {
                                                 id: 'loading',
                                                 duration: 5000
                                             })
                                         }} 
                                         href='/create_blog'>Create</LazyLink>
-                                        <LazyLink onClick={() => {handleHideDropdown() 
+                                        <LazyLink onClick={() => {handleShowDropdown() 
                                                 toast.loading('Loading', {
                                                     id: 'loading',
                                                     duration: 5000
@@ -108,7 +108,7 @@ const Navbar = () => {
                                     <button onClick={
                                             () => {
                                                 signOut();
-                                                handleHideDropdown();
+                                                handleShowDropdown();
                                             }
                                         }
                                         className='border-none text-white rounded-md font-bold font-lg '>Logout</button>
@@ -148,21 +148,21 @@ const Navbar = () => {
                             duration: 5000
                         })
                         }}>Home</Link>
-                    <LazyLink onClick={() => {handleHideDropdown() 
+                    <LazyLink onClick={() => {handleShowMenu() 
                                                 toast.loading('Loading', {
                                                     id: 'loading',
                                                     duration: 5000
                                                 })    
                                             }}
                             href='/all'>All</LazyLink>
-                    <LazyLink onClick={() => {handleHideDropdown() 
+                    <LazyLink onClick={() => {handleShowMenu() 
                                                 toast.loading('Loading', {
                                                     id: 'loading',
                                                     duration: 5000
                                                 })    
                                             }}
                             href='/about'>About</LazyLink>
-                    <LazyLink onClick={() => {handleHideDropdown() 
+                    <LazyLink onClick={() => {handleShowMenu() 
                                                 toast.loading('Loading', {
                                                     id: 'loading',
                                                     duration: 5000
@@ -177,7 +177,7 @@ const Navbar = () => {
                         {
                             showDropdown && (
                                 <div className='flex flex-col items-start gap-y-4 text-lg rounded-md cursor-pointer'>
-                                    <LazyLink onClick={() => {handleHideDropdown() 
+                                    <LazyLink onClick={() => {handleShowMenu() 
                                                 toast.loading('Loading', {
                                                     id: 'loading',
                                                     duration: 5000
@@ -185,7 +185,7 @@ const Navbar = () => {
                                             }}
                                         href='/create_blog'
                                         className='border-t-2 w-full pt-2'>Create</LazyLink>
-                                    <LazyLink onClick={() => {handleHideDropdown() 
+                                    <LazyLink onClick={() => {handleShowMenu() 
                                                 toast.loading('Loading', {
                                                     id: 'loading',
                                                     duration: 5000
@@ -195,7 +195,7 @@ const Navbar = () => {
                                     <button onClick={
                                             () => {
                                                 signOut();
-                                                handleHideDropdown();
+                                                handleShowMenu();
                                             }
                                         }
                                         className='border-none text-[#45c6a6] rounded-md font-bold font-lg p-0'>
