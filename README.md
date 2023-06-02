@@ -3,7 +3,7 @@
 Modern FullStack Blog Website where you can express your thoughts online
 
 Technologies used:
-- NextKs
+- NextJs
 - React
 - TailwindCSS
 - MongoDb
